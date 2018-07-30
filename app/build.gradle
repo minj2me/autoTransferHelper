@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+def dbflow_version = "4.2.4"
+def okhttpVersion="3.9.1"
+def retrofitVersion="2.3.0"
+
+android {
+  compileSdkVersion 27
+  defaultConfig {
+    applicationId "project.kotlin.johnnyzhao.com.alipaytransferhelper"
+    minSdkVersion 19
+    targetSdkVersion 27
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+repositories {
+  maven {url "https://jitpack.io"}
+}
+
+kapt {
+  generateStubs = true//for eventbus
+}
+
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  implementation 'com.android.support:appcompat-v7:27.1.1'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.1'
+  //implementation 'com.jakewharton:butterknife:8.5.1'
+  implementation 'com.android.support:design:27.1.1'
+  kapt 'com.jakewharton:butterknife-compiler:8.8.0'
+  implementation 'com.jakewharton:butterknife:8.8.0'
+  implementation "com.orhanobut:hawk:2.0.1"
+  //implementation "org.greenrobot:eventbus:3.1.1"
+  implementation 'com.eightbitlab:rxbus:1.0.2'
+
+  // Use if Kotlin user.
+  kapt "com.github.raizlabs.dbflow:dbflow-processor:$dbflow_version"
+  implementation "com.github.raizlabs.dbflow:dbflow-core:$dbflow_version"
+  implementation "com.github.raizlabs.dbflow:dbflow:$dbflow_version"
+
+  implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+  implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+  implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion"){
+    // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
+    exclude module: 'okhttp'
+  }
+  implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+  compileOnly 'de.robv.android.xposed:api:82'
+  compileOnly 'de.robv.android.xposed:api:82:sources'
+}

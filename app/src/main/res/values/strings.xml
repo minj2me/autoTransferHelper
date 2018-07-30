@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">自动转账助手</string>
+  <string name="accessibility_description">自动转账助手</string>
+  <string name="none_transfer_out_alipay_account">支付宝转出账号为空</string>
+  <string name="none_transfer_out_wechat_account">微信转出账号为空</string>
+  <string name="note_wrong_wechat_password">微信支付密码应为6位</string>
+  <string name="log_receive_record_uploaded">到账记录上报成功</string>
+  <string name="log_transfer_out_record_uploaded">转出记录上报成功</string>
+</resources>
